@@ -1,0 +1,12 @@
+.form-control:read-only {
+    background-color: transparent;
+
+    &:read-only:focus {
+        border-color: #ced4da;
+        box-shadow: none;
+    }
+}
+
+.btn {
+    width: 80px;
+}

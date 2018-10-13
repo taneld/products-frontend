@@ -1,0 +1,11 @@
+<h2 class="mb-4">Categories</h2>
+<app-category-item *ngFor="let category of categories"
+                   [category]="category"
+                   [editableId]="editableId"
+                   (onUpdate)="updateCategory($event)"
+                   (onEditStart)="onItemEditStart($event)"
+                   (onDelete)="deleteCategory($event)"
+></app-category-item>
+
+<h5 class="mt-5">Add new category</h5>
+<app-category-edit (onCreate)="onCategoryCreate($event)"></app-category-edit>

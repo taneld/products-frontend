@@ -1,0 +1,77 @@
+<div *ngIf="product && editableProduct && categories; else loadingMessage">
+    <h2 class="mb-4">
+        <span *ngIf="id">Edit {{ product.name }}</span>
+        <span *ngIf="!id">Add new product</span>
+    </h2>
+
+    <div class="form-group">
+        <label for="product-name">Name: *</label>
+        <input type="text"
+               [(ngModel)]="editableProduct.name"
+               class="form-control"
+               id="product-name"
+        >
+    </div>
+    <div class="form-group">
+        <label for="product-description">Description: *</label>
+        <textarea class="form-control"
+                  [(ngModel)]="editableProduct.description"
+                  id="product-description"
+                  rows="3"
+        >
+        </textarea>
+    </div>
+    <div class="form-group">
+        <label for="product-price">Price: *</label>
+        <input type="number"
+               [(ngModel)]="editableProduct.price"
+               class="form-control"
+               id="product-price"
+               min="0"
+               step="0.01"
+        >
+    </div>
+
+    <div class="form-group">
+        <label>Select categorie(s):</label>
+        <ul class="list-group">
+            <li class="list-group-item"
+                [class.active]="editableProduct.categories && editableProduct.categories.indexOf(category._id) > -1"
+                (click)="onCategoryClick(category._id)"
+                *ngFor="let category of categories"
+            >
+                {{ category.name }}
+            </li>
+        </ul>
+    </div>
+
+
+    <button type="button"
+            class="btn btn-outline-secondary"
+            (click)="onResetClick()"
+            [disabled]="saveInProgress"
+    >
+        Reset form
+    </button>
+
+    <button type="button"
+            class="btn btn-danger float-right ml-2"
+            (click)="onCancelClick()"
+            [disabled]="saveInProgress"
+    >
+        Cancel
+    </button>
+
+
+    <button type="button"
+            class="btn btn-primary float-right"
+            (click)="onSaveClick()"
+            [disabled]="!formIsValid() || saveInProgress"
+    >
+        Save
+    </button>
+</div>
+
+<ng-template #loadingMessage>
+    <h2 class="mb-4">Loading...</h2>
+</ng-template>

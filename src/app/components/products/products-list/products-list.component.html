@@ -1,0 +1,53 @@
+<h2 class="mb-4">Products</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Categories</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>
+                {{ product.name }}
+            </td>
+            <td>
+                {{ product.description }}
+            </td>
+            <td>
+                {{ formatPrice(product.price) }}
+            </td>
+            <td>
+                <div *ngFor="let categoryId of product.categories">
+                    <span class="badge badge-secondary">
+                        {{ getCategoryById(categoryId).name }}
+                    </span>
+                </div>
+            </td>
+            <td>
+                <button class="btn btn-success"
+                        routerLink="/products/edit/{{ product._id }}"
+                        [disabled]="saveInProgress"
+                >
+                    Edit
+                </button>
+                <button class="btn btn-danger ml-2"
+                        (click)="onDeleteClick(product._id)"
+                        [disabled]="saveInProgress"
+                >
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="btn btn-primary"
+        routerLink="/products/add"
+>
+    Add new product
+</button>

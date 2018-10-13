@@ -1,0 +1,18 @@
+<div class="form-group">
+    <div class="input-group">
+        <input type="text"
+               [(ngModel)]="newCategoryName"
+               (input)="clearNameError()"
+               class="form-control"
+        >
+        <div class="input-group-append">
+            <button (click)="onSaveClick()"
+                    [disabled]="saveInProgress || !newCategoryName.trim()"
+                    class="btn btn-primary"
+            >
+                Add
+            </button>
+        </div>
+    </div>
+    <small *ngIf="nameError" class="form-text text-danger">{{ nameError }}</small>
+</div>
